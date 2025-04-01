@@ -1,6 +1,4 @@
 CryptoWeather Nexus
-
-
 CryptoWeather Nexus is a modern dashboard that combines weather data, cryptocurrency information, and real-time notifications using WebSockets. It provides live weather updates, cryptocurrency prices, and crypto-related news. Built using Next.js, React, Redux, and Tailwind CSS, this project aims to offer a smooth and interactive user experience.
 
 Features
@@ -32,7 +30,7 @@ To run this project locally, follow these steps:
 bash
 Copy
 Edit
-git clone https://github.com/your-username/crypto-weather-nexus.git
+git clone git clone https://github.com/satishnadipalli/Cryptoweather_nextapp.git
 cd crypto-weather-nexus
 2. Install Dependencies
 Make sure you have Node.js installed, then run the following command:
@@ -47,9 +45,10 @@ Create a .env.local file in the root directory of the project and add the follow
 bash
 Copy
 Edit
-NEXT_PUBLIC_OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
-NEXT_PUBLIC_COINGECKO_API_KEY=your_coingecko_api_key
-NEXT_PUBLIC_NEWS_API_KEY=your_news_api_key
+NEXT_PUBLIC_OPENWEATHER_API_KEY = 6147560f926f269df2ca938ff8ce8783
+NEXT_PUBLIC_NEWS_API_KEY=pub_774384ba2176cddbbffd312f4a4338b8a8d19
+
+
 You can get these API keys by signing up for the respective services:
 
 OpenWeatherMap API
@@ -116,7 +115,3 @@ WebSocket Integration: Handling real-time data with WebSocket was challenging, b
 API Rate Limits: To handle rate limits for external APIs, we implemented data caching and periodic refreshing every 60 seconds.
 
 Responsive Design: Tailwind CSS made it easier to build a responsive layout that looks great on mobile and desktop.
-
-License
-This project is open-source and available under the MIT License. See the LICENSE file for more details.
-
