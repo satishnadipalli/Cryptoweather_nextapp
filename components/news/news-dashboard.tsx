@@ -21,18 +21,14 @@ export function NewsDashboard({ fullView = false }: NewsDashboardProps) {
 
   // Function to fetch news
   const fetchNews = async () => {
-    console.log("loading")
     try {
-      console.log("loading2")
+      console.log("Fetching news...")
       const apiKey = process.env.NEXT_PUBLIC_NEWS_API_KEY
-      console.log(process.env.NEXT_PUBLIC_NEWS_API_KEY)
       if (!apiKey) {
         throw new Error("API key is missing.")
-      } 
+      }
 
-      console.log(apiKey)
-      
-      const url = `https://newsapi.org/v2/top-headlines?apiKey=${apiKey}&language=en`
+      const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&language=en`
       dispatch(setLoading()) 
 
       const response = await fetch(url)
@@ -41,30 +37,26 @@ export function NewsDashboard({ fullView = false }: NewsDashboardProps) {
       }
 
       const data = await response.json()
-      dispatch(setNewsData(data.articles)) // Set fetched data
+      dispatch(setNewsData(data.results)) // Use "results" for NewsData.io
     } catch (error) {
       dispatch(setError(error.message || "Failed to load news data"))
     }
   }
 
   useEffect(() => {
-    // Fetch news data if status is idle
     if (status === "idle") {
       fetchNews()
     }
-
-    // Refresh news data every 5 minutes
     const interval = setInterval(() => {
       fetchNews()
     }, 300000)
-
     return () => clearInterval(interval)
   }, [dispatch, status])
 
   const handleRefresh = async () => {
     setRefreshing(true)
     await fetchNews()
-    setTimeout(() => setRefreshing(false), 1000) // Ensure animation plays fully
+    setTimeout(() => setRefreshing(false), 1000)
   }
 
   if (status === "loading" && !data.length) {
@@ -133,14 +125,11 @@ export function NewsDashboard({ fullView = false }: NewsDashboardProps) {
       </div>
 
       <div className="space-y-4">
-        {console.log(newsToDisplay,"news")}
-        {newsToDisplay.map((article,index) =>{
-          return(
-            <div key={index}>
-              <NewsCard id={index} articled={article} />
-            </div>
-          )
-        })}
+        {newsToDisplay.map((article, index) => (
+          <div key={index}>
+            <NewsCard id={index} articled={article} />
+          </div>
+        ))}
       </div>
     </div>
   )
